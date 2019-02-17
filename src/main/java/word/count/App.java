@@ -1,5 +1,6 @@
 package word.count;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -10,11 +11,12 @@ public class App {
                     "Required parameters:%n" +
                             "\tclass_name: one of %s%n" +
                             "\tpath: path to text file%n%n",
-                    List.of(
+                    Arrays.asList(
                             CounterJ02.class,
                             CounterJ05.class,
                             CounterJ07.class,
                             CounterJ08.class,
+                            CounterJ08Parallel.class,
                             CounterJ11.class
                     )
             );
@@ -44,6 +46,11 @@ public class App {
 
         totalStopWatch.stop();
 
+        // Print word frequencies
+        for (WordFrequency wordFrequency : wordFrequencies) {
+            System.out.println( wordFrequency );
+        }
+
         // Print statistics
         // # extractWords,countWords,mostFrequentWords,total
         System.out.printf(
@@ -53,5 +60,10 @@ public class App {
                 wordFrequenciesStopWatch.getElapsedTimeSeconds(),
                 totalStopWatch.getElapsedTimeSeconds()
         );
+
+        // Perform cleanup
+        words.clear();
+        countWords.clear();
+        wordFrequencies.clear();
     }
 }
