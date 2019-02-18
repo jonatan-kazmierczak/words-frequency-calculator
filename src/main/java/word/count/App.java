@@ -37,7 +37,7 @@ public class App {
         extractWordsStopWatch.stop();
 
         StopWatch countWordsStopWatch = new StopWatch();
-        Map<String, Integer> countWords = counter.countWords( words );
+        Map<String, ? extends Number> countWords = counter.countWords( words );
         countWordsStopWatch.stop();
 
         StopWatch wordFrequenciesStopWatch = new StopWatch();

@@ -13,13 +13,13 @@ public final class CounterJ02 implements Counter {
     }
 
     @Override
-    public Map<String, Integer> countWords(List<String> words) {
+    public Map<String, ? extends Number> countWords(List<String> words) {
         HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 1 );
         return Collections.emptyMap();
     }
 
     @Override
-    public List<WordFrequency> mostFrequentWords(Map<String, Integer> wordCounts, int limit) {
+    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit) {
         return Collections.emptyList();
     }
 }

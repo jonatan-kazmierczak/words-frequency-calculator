@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface Counter {
     List<String> extractWords(String path);
-    Map<String, Integer> countWords(List<String> words);
-    List<WordFrequency> mostFrequentWords(Map<String, Integer> wordCounts, int limit);
+    Map<String, ? extends Number> countWords(List<String> words);
+    List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit);
 }

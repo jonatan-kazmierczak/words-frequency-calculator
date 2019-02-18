@@ -12,12 +12,12 @@ public final class CounterJ11 implements Counter {
     }
 
     @Override
-    public Map<String, Integer> countWords(List<String> words) {
+    public Map<String, ? extends Number> countWords(List<String> words) {
         return Collections.emptyMap();
     }
 
     @Override
-    public List<WordFrequency> mostFrequentWords(Map<String, Integer> wordCounts, int limit) {
+    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit) {
         return Collections.emptyList();
     }
 }
