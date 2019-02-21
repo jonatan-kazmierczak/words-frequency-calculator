@@ -40,7 +40,7 @@ public final class CounterJ05 implements Counter {
     }
 
     @Override
-    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit) {
+    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
         Collections.<Map.Entry<String, ? extends Number>> sort(
                 (List<Map.Entry<String, ? extends Number>>) wordCountsList,
@@ -61,7 +61,7 @@ public final class CounterJ05 implements Counter {
                     new WordFrequency(
                             wordCount.getKey(),
                             wordCount.getValue().intValue(),
-                            0
+                            totalWordCount
                     )
             );
         }

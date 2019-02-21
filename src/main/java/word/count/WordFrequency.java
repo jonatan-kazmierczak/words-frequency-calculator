@@ -11,12 +11,16 @@ public final class WordFrequency {
         this.totalCount = totalCount;
     }
 
+    public double getFrequency() {
+        return 1.0 * count / totalCount;
+    }
+
     @Override
     public String toString() {
         return "WordFrequency{" +
-                "word='" + word + '\'' +
+                " frequency=" + String.format( "%.3f", getFrequency() ) +
                 ", count=" + count +
-                ", totalCount=" + totalCount +
-                '}';
+                ", word='" + word + '\'' +
+                " }";
     }
 }

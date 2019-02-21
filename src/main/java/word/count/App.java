@@ -34,6 +34,7 @@ public class App {
 
         StopWatch extractWordsStopWatch = new StopWatch();
         List<String> words = counter.extractWords( path );
+        int totalWordCount = words.size();
         extractWordsStopWatch.stop();
 
         StopWatch countWordsStopWatch = new StopWatch();
@@ -41,7 +42,7 @@ public class App {
         countWordsStopWatch.stop();
 
         StopWatch wordFrequenciesStopWatch = new StopWatch();
-        List<WordFrequency> wordFrequencies = counter.mostFrequentWords( countWords, 15 );
+        List<WordFrequency> wordFrequencies = counter.mostFrequentWords( countWords, totalWordCount, 15 );
         wordFrequenciesStopWatch.stop();
 
         totalStopWatch.stop();

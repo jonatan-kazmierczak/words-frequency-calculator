@@ -17,7 +17,7 @@ public final class CounterJ08Parallel implements Counter {
     }
 
     @Override
-    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit) {
+    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         return Collections.emptyList();
     }
 }
