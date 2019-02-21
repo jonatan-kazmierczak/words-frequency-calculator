@@ -1,6 +1,5 @@
 package word.count;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.UncheckedIOException;
@@ -12,7 +11,7 @@ public final class CounterJ05 implements Counter {
     @Override
     public List<String> extractWords(String path) {
         LinkedList<String> words = new LinkedList<>();
-        try ( Scanner sc = new Scanner( new BufferedReader( new FileReader( path ) ) ) ) {
+        try ( Scanner sc = new Scanner( new FileReader( path ) ) ) {
             while ( sc.hasNext() ) {
                 String word = sc.next();
                 // consider words 3+ letters long
@@ -42,9 +41,30 @@ public final class CounterJ05 implements Counter {
 
     @Override
     public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int limit) {
-        for ( Map.Entry<String, ? extends Number> wordCounter : wordCounts.entrySet() ) {
-
+        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
+        Collections.<Map.Entry<String, ? extends Number>> sort(
+                (List<Map.Entry<String, ? extends Number>>) wordCountsList,
+                new Comparator<Map.Entry<String, ? extends Number>>() {
+                    @Override
+                    public int compare(Map.Entry<String, ? extends Number> o1, Map.Entry<String, ? extends Number> o2) {
+                        int res = o2.getValue().intValue() - o1.getValue().intValue();
+                        if (res == 0) {
+                            res = o1.getKey().compareTo( o2.getKey() );
+                        }
+                        return res;
+                    }
+                } );
+        ArrayList<WordFrequency> wordFrequencies = new ArrayList<>( limit );
+        for ( int i = 0, count = Math.min( wordCountsList.size(), limit + 1 ); i < count; ++i ) {
+            Map.Entry<String, ? extends Number> wordCount = wordCountsList.get( i );
+            wordFrequencies.add(
+                    new WordFrequency(
+                            wordCount.getKey(),
+                            wordCount.getValue().intValue(),
+                            0
+                    )
+            );
         }
-        return Collections.emptyList();
+        return wordFrequencies;
     }
 }

@@ -54,7 +54,7 @@ public class App {
         // Print statistics
         // # extractWords,countWords,mostFrequentWords,total
         System.out.printf(
-                "%f,%f,%f,%f",
+                "%f,%f,%f,%f%n",
                 extractWordsStopWatch.getElapsedTimeSeconds(),
                 countWordsStopWatch.getElapsedTimeSeconds(),
                 wordFrequenciesStopWatch.getElapsedTimeSeconds(),
