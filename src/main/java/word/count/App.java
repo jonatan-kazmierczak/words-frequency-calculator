@@ -39,6 +39,7 @@ public class App {
 
         StopWatch countWordsStopWatch = new StopWatch();
         Map<String, ? extends Number> countWords = counter.countWords( words );
+        int uniqueWordCount = countWords.size();
         countWordsStopWatch.stop();
 
         StopWatch wordFrequenciesStopWatch = new StopWatch();
@@ -47,6 +48,7 @@ public class App {
 
         totalStopWatch.stop();
 
+        System.out.printf( "%d total words %n%d unique words%n%n", totalWordCount, uniqueWordCount );
         // Print word frequencies
         for (WordFrequency wordFrequency : wordFrequencies) {
             System.out.println( wordFrequency );
@@ -55,7 +57,7 @@ public class App {
         // Print statistics
         // # extractWords,countWords,mostFrequentWords,total
         System.out.printf(
-                "%f,%f,%f,%f%n",
+                "%.3f,%.3f,%.3f,%.3f%n",
                 extractWordsStopWatch.getElapsedTimeSeconds(),
                 countWordsStopWatch.getElapsedTimeSeconds(),
                 wordFrequenciesStopWatch.getElapsedTimeSeconds(),
