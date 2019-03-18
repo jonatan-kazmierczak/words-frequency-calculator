@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public final class CounterJ02 implements Counter {
 
@@ -43,6 +42,26 @@ public final class CounterJ02 implements Counter {
 
     @Override
     public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
-        return Collections.emptyList();
+        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
+        Collections.sort(
+                wordCountsList,
+                new Comparator<Map.Entry<String, ? extends Number>>() {
+                    @Override
+                    public int compare(Map.Entry<String, ? extends Number> e1, Map.Entry<String, ? extends Number> e2) {
+                        return e2.getValue().intValue() - e1.getValue().intValue();
+                    }
+                } );
+        ArrayList<WordFrequency> wordFrequencies = new ArrayList<>( limit );
+        for ( int i = 0, count = Math.min( wordCountsList.size(), limit ); i < count; ++i ) {
+            Map.Entry<String, ? extends Number> wordCount = wordCountsList.get( i );
+            wordFrequencies.add(
+                    new WordFrequency(
+                            wordCount.getKey(),
+                            wordCount.getValue().intValue(),
+                            totalWordCount
+                    )
+            );
+        }
+        return wordFrequencies;
     }
 }

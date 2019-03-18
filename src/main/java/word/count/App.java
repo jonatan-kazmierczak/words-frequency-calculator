@@ -1,30 +1,34 @@
 package word.count;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        if ( args.length < 2 ) {
+        // Explicit instantiation required by native-image compiler (from GraalVM)
+        Map<String, Counter> implementations = Stream.of(
+                new CounterJ02(),
+                new CounterJ05(),
+                new CounterJ07(),
+                new CounterJ08(),
+                new CounterJ08Parallel()
+        ).collect( Collectors.toMap( c -> c.getClass().getSimpleName(), c -> c, (l, r) -> l, TreeMap::new ) );
+
+        if ( args.length < 2 || !implementations.containsKey( args[0] ) ) {
             String usage = String.format(
                     "Required parameters:%n" +
                             "\tclass_name: one of %s%n" +
                             "\tpath: path to text file%n%n",
-                    Arrays.asList(
-                            CounterJ02.class,
-                            CounterJ05.class,
-                            CounterJ07.class,
-                            CounterJ08.class,
-                            CounterJ08Parallel.class,
-                            CounterJ11.class
-                    )
+                    implementations.keySet()
             );
             System.out.println(usage);
             throw new AssertionError( "Missing class_name and/or path" );
         }
 
-        Counter counter = (Counter) Class.forName( args[0] ).getDeclaredConstructor().newInstance();
+        Counter counter = implementations.get( args[0] );
         String path = args[1];
         run( counter, path );
     }
