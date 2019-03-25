@@ -30,10 +30,11 @@ public class App {
 
         Counter counter = implementations.get( args[0] );
         String path = args[1];
-        run( counter, path );
+        boolean beQuiet = args.length > 2;
+        run( counter, path, beQuiet );
     }
 
-    private static void run(Counter counter, String path) {
+    private static void run(Counter counter, String path, boolean beQuiet) {
         StopWatch totalStopWatch = new StopWatch();
 
         StopWatch extractWordsStopWatch = new StopWatch();
@@ -52,20 +53,23 @@ public class App {
 
         totalStopWatch.stop();
 
-        System.out.printf( "%d total words %n%d unique words%n%n", totalWordCount, uniqueWordCount );
-        // Print word frequencies
-        for (WordFrequency wordFrequency : wordFrequencies) {
-            System.out.println( wordFrequency );
+        if (!beQuiet) {
+            System.out.printf( "%d total words %n%d unique words%n%n", totalWordCount, uniqueWordCount );
+            // Print word frequencies
+            for (WordFrequency wordFrequency : wordFrequencies) {
+                System.out.println( wordFrequency );
+            }
         }
 
         // Print statistics
         // # extractWords,countWords,mostFrequentWords,total
         System.out.printf(
-                "%.3f,%.3f,%.3f,%.3f%n",
+                "%s,%.3f,%.3f,%.3f,%.3f%n",
+                counter.getClass().getSimpleName(),
+                totalStopWatch.getElapsedTimeSeconds(),
                 extractWordsStopWatch.getElapsedTimeSeconds(),
                 countWordsStopWatch.getElapsedTimeSeconds(),
-                wordFrequenciesStopWatch.getElapsedTimeSeconds(),
-                totalStopWatch.getElapsedTimeSeconds()
+                wordFrequenciesStopWatch.getElapsedTimeSeconds()
         );
 
         // Perform cleanup

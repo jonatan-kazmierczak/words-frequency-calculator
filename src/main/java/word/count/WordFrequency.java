@@ -15,10 +15,14 @@ public final class WordFrequency {
         return 1.0 * count / totalCount;
     }
 
+    public String getFrequencyAsString() {
+        return String.format( "%.3f", 1.0 * count / totalCount );
+    }
+
     @Override
     public String toString() {
         return "WordFrequency{" +
-                " frequency=" + String.format( "%.3f", getFrequency() ) +
+                " frequency=" + getFrequencyAsString() +
                 ", count=" + count +
                 ", word='" + word + '\'' +
                 " }";
