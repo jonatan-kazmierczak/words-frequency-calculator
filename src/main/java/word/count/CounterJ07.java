@@ -1,7 +1,5 @@
 package word.count;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -13,7 +11,6 @@ public final class CounterJ07 implements Counter {
 
     @Override
     public List<String> extractWords(String path) {
-        //LinkedList<String> words = new LinkedList<>();
         ArrayList<String> words = new ArrayList<>( 0x2000 );
         try ( Scanner sc = new Scanner( Files.newBufferedReader( Paths.get( path ) ) ) ) {
             while ( sc.hasNext() ) {

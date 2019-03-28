@@ -11,9 +11,8 @@ public final class CounterJ05 implements Counter {
 
     @Override
     public List<String> extractWords(String path) {
-        //LinkedList<String> words = new LinkedList<>();
         ArrayList<String> words = new ArrayList<>( 0x1000 );
-        try ( Scanner sc = new Scanner( new BufferedReader( new FileReader( path ) ) ) ) {
+        try ( Scanner sc = new Scanner( new FileReader( path ) ) ) {
             while ( sc.hasNext() ) {
                 String word = sc.next();
                 // consider words 3+ letters long

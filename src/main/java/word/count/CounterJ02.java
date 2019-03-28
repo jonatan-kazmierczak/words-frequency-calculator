@@ -10,7 +10,6 @@ public final class CounterJ02 implements Counter {
 
     @Override
     public List<String> extractWords(String path) {
-        //LinkedList<String> words = new LinkedList<>();
         ArrayList<String> words = new ArrayList<>( 0x1000 );
         try ( BufferedReader reader = new BufferedReader( new FileReader( path ) ) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine() ) {
