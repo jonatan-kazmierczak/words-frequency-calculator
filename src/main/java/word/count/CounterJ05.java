@@ -12,7 +12,7 @@ public final class CounterJ05 implements Counter {
     @Override
     public List<String> extractWords(String path) {
         ArrayList<String> words = new ArrayList<>( 0x1000 );
-        try ( Scanner sc = new Scanner( new FileReader( path ) ) ) {
+        try ( Scanner sc = new Scanner( new BufferedReader( new FileReader( path ) ) ) ) {
             while ( sc.hasNext() ) {
                 String word = sc.next();
                 // consider words 3+ letters long
@@ -28,7 +28,7 @@ public final class CounterJ05 implements Counter {
 
     @Override
     public Map<String, ? extends Number> countWords(List<String> words) {
-        HashMap<String, AtomicInteger> wordCounters = new HashMap<>( words.size() >> 1 );
+        HashMap<String, AtomicInteger> wordCounters = new HashMap<>( words.size() >> 2 );
         for ( String word : words ) {
             AtomicInteger counter = wordCounters.get( word );
             if ( counter == null ) {

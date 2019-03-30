@@ -16,7 +16,7 @@ public final class CounterJ08Parallel implements Counter {
     public List<String> extractWords(String path) {
         try ( Stream<String> fileLines = Files.lines( Paths.get( path ) ) ) {
             return fileLines.parallel().unordered()
-                    .map( line -> line.split( " " ) )
+                    .map( line -> line.split( "\\p{javaWhitespace}+" ) )
                     .flatMap( wordArr -> Stream.of( wordArr ).parallel().unordered() )
                     .filter( word -> word.length() > 2 )
                     .map( String::toLowerCase )
@@ -29,7 +29,7 @@ public final class CounterJ08Parallel implements Counter {
     @Override
     public Map<String, ? extends Number> countWords(List<String> words) {
         return words.parallelStream().unordered()
-                .collect( Collectors.groupingByConcurrent( w -> w, Collectors.summingInt( w -> 1 ) ) );
+                .collect( Collectors.groupingByConcurrent( word -> word, Collectors.summingInt( word -> 1 ) ) );
     }
 
     @Override

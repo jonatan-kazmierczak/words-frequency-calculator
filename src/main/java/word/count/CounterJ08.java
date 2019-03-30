@@ -16,7 +16,7 @@ public final class CounterJ08 implements Counter {
     public List<String> extractWords(String path) {
         try ( Stream<String> fileLines = Files.lines( Paths.get( path ) ) ) {
             return fileLines
-                    .map( line -> line.split( " " ) )
+                    .map( line -> line.split( "\\p{javaWhitespace}+" ) )
                     .flatMap( Stream::of )
                     .filter( word -> word.length() > 2 )
                     .map( String::toLowerCase )
@@ -29,7 +29,7 @@ public final class CounterJ08 implements Counter {
     @Override
     public Map<String, ? extends Number> countWords(List<String> words) {
         return words.stream()
-                .collect( Collectors.groupingBy( w -> w, Collectors.summingInt( w -> 1 ) ) );
+                .collect( Collectors.groupingBy( word -> word, Collectors.summingInt( word -> 1 ) ) );
     }
 
     @Override

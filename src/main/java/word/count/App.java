@@ -59,6 +59,8 @@ public class App {
             for (WordFrequency wordFrequency : wordFrequencies) {
                 System.out.println( wordFrequency );
             }
+
+            System.out.println( "\n# Implementation,Total_Time,extractWords_Time,countWords_Time,mostFrequentWords_Time" );
         }
 
         // Print statistics

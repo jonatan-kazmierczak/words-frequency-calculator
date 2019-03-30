@@ -30,7 +30,7 @@ public final class CounterJ02 implements Counter {
 
     @Override
     public Map<String, ? extends Number> countWords(List<String> words) {
-        HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 1 );
+        HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 2 );
         for ( String word : words ) {
             Integer counter = wordCounters.get( word );
             counter = (counter == null) ? 1 : counter + 1;
