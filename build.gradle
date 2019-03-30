@@ -7,7 +7,7 @@ plugins {
 }
 
 // Define the main class for the application
-mainClassName = 'word.count.App'
+mainClassName = 'com.trivadis.word.count.App'
 
 jar {
     manifest {

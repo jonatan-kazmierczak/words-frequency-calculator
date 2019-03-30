@@ -1,4 +1,4 @@
-package word.count;
+package com.trivadis.word.count;
 
 import java.util.List;
 import java.util.Map;
@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // Explicit instantiation required by native-image compiler (from GraalVM)
         Map<String, Counter> implementations = Stream.of(
-                new CounterJ02(),
-                new CounterJ05(),
-                new CounterJ07(),
-                new CounterJ08(),
-                new CounterJ08Parallel()
+                new CounterJ2(),
+                new CounterJ5(),
+                new CounterJ7(),
+                new CounterJ8(),
+                new CounterJ8Prl()
         ).collect( Collectors.toMap( c -> c.getClass().getSimpleName(), c -> c, (l, r) -> l, TreeMap::new ) );
 
         if ( args.length < 2 || !implementations.containsKey( args[0] ) ) {

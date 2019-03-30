@@ -1,26 +1,28 @@
-package word.count;
+package com.trivadis.word.count;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public final class CounterJ07 implements Counter {
+public final class CounterJ2 implements Counter {
 
     @Override
     public List<String> extractWords(String path) {
-        ArrayList<String> words = new ArrayList<>( 0x2000 );
-        try ( Scanner sc = new Scanner( Files.newBufferedReader( Paths.get( path ) ) ) ) {
-            while ( sc.hasNext() ) {
-                String word = sc.next();
-                // consider words 3+ letters long
-                if ( word.length() > 2 ) {
-                    words.add( word.toLowerCase() );
+        ArrayList<String> words = new ArrayList<>( 0x1000 );
+        try ( BufferedReader reader = new BufferedReader( new FileReader( path ) ) ) {
+            for ( String line = reader.readLine(); line != null; line = reader.readLine() ) {
+                StringTokenizer tokenizer = new StringTokenizer( line );
+                while ( tokenizer.hasMoreElements() ) {
+                    String word = tokenizer.nextToken();
+                    // consider words 3+ letters long
+                    if ( word.length() > 2 ) {
+                        words.add( word.toLowerCase() );
+                    }
                 }
             }
-        } catch (IOException e ) {
+        } catch ( IOException e ) {
             throw new UncheckedIOException( e );
         }
         return words;
@@ -28,14 +30,11 @@ public final class CounterJ07 implements Counter {
 
     @Override
     public Map<String, ? extends Number> countWords(List<String> words) {
-        HashMap<String, AtomicInteger> wordCounters = new HashMap<>( words.size() >> 2 );
+        HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 2 );
         for ( String word : words ) {
-            AtomicInteger counter = wordCounters.get( word );
-            if ( counter == null ) {
-                counter = new AtomicInteger();
-                wordCounters.put( word, counter );
-            }
-            counter.getAndIncrement();
+            Integer counter = wordCounters.get( word );
+            counter = (counter == null) ? 1 : counter + 1;
+            wordCounters.put( word, counter );
         }
         return wordCounters;
     }

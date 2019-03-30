@@ -1,4 +1,4 @@
-package word.count;
+package com.trivadis.word.count;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class CounterJ08Parallel implements Counter {
+public final class CounterJ8Prl implements Counter {
 
     @Override
     public List<String> extractWords(String path) {

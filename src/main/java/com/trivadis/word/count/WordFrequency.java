@@ -1,4 +1,4 @@
-package word.count;
+package com.trivadis.word.count;
 
 public final class WordFrequency {
     public final String word;

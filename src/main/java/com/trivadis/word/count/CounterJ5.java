@@ -1,4 +1,4 @@
-package word.count;
+package com.trivadis.word.count;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.UncheckedIOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class CounterJ05 implements Counter {
+public final class CounterJ5 implements Counter {
 
     @Override
     public List<String> extractWords(String path) {

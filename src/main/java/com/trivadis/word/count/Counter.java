@@ -1,4 +1,4 @@
-package word.count;
+package com.trivadis.word.count;
 
 import java.util.List;
 import java.util.Map;
