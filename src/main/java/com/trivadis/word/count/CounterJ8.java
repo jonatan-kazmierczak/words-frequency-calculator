@@ -18,7 +18,7 @@ public final class CounterJ8 implements Counter {
             return fileLines
                     .map( line -> line.split( "\\p{javaWhitespace}+" ) )
                     .flatMap( Stream::of )
-                    .filter( word -> word.length() > 2 )
+                    .filter( word -> word.length() > WORD_LENGTH_THRESHOLD )
                     .map( String::toLowerCase )
                     .collect( Collectors.toList() );
         } catch ( IOException e ) {

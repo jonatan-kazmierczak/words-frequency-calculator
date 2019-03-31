@@ -16,8 +16,7 @@ public final class CounterJ2 implements Counter {
                 StringTokenizer tokenizer = new StringTokenizer( line );
                 while ( tokenizer.hasMoreElements() ) {
                     String word = tokenizer.nextToken();
-                    // consider words 3+ letters long
-                    if ( word.length() > 2 ) {
+                    if ( word.length() > WORD_LENGTH_THRESHOLD ) {
                         words.add( word.toLowerCase() );
                     }
                 }

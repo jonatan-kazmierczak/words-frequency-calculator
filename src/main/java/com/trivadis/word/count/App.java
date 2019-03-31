@@ -54,13 +54,13 @@ public class App {
         totalStopWatch.stop();
 
         if (!beQuiet) {
-            System.out.printf( "%d total words %n%d unique words%n%n", totalWordCount, uniqueWordCount );
+            System.out.printf( "%d considered words %n%d unique words%n%n", totalWordCount, uniqueWordCount );
             // Print word frequencies
             for (WordFrequency wordFrequency : wordFrequencies) {
                 System.out.println( wordFrequency );
             }
 
-            System.out.println( "\n# Implementation,Total_Time,extractWords_Time,countWords_Time,mostFrequentWords_Time" );
+            System.out.println( "\n# Implementation,Total_Processing_Time,extractWords_Time,countWords_Time,mostFrequentWords_Time" );
         }
 
         // Print statistics

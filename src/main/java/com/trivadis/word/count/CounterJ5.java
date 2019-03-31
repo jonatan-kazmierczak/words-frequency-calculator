@@ -15,8 +15,7 @@ public final class CounterJ5 implements Counter {
         try ( Scanner sc = new Scanner( new BufferedReader( new FileReader( path ) ) ) ) {
             while ( sc.hasNext() ) {
                 String word = sc.next();
-                // consider words 3+ letters long
-                if ( word.length() > 2 ) {
+                if ( word.length() > WORD_LENGTH_THRESHOLD ) {
                     words.add( word.toLowerCase() );
                 }
             }
