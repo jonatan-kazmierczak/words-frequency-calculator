@@ -9,7 +9,7 @@ import java.util.*;
 public final class CounterJ2 implements Counter {
 
     @Override
-    public List<String> extractWords(String path) {
+    public Collection<String> extractWords(String path) {
         ArrayList<String> words = new ArrayList<>( 0x1000 );
         try ( BufferedReader reader = new BufferedReader( new FileReader( path ) ) ) {
             for ( String line = reader.readLine(); line != null; line = reader.readLine() ) {
@@ -28,7 +28,7 @@ public final class CounterJ2 implements Counter {
     }
 
     @Override
-    public Map<String, ? extends Number> countWords(List<String> words) {
+    public Map<String, ? extends Number> countWords(Collection<String> words) {
         HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 2 );
         for ( String word : words ) {
             Integer counter = wordCounters.get( word );
@@ -39,7 +39,7 @@ public final class CounterJ2 implements Counter {
     }
 
     @Override
-    public List<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+    public Collection<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
         Collections.sort(
                 wordCountsList,

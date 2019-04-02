@@ -1,6 +1,6 @@
 package com.trivadis.word.count;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -21,7 +21,9 @@ public class App {
             String usage = String.format(
                     "Required parameters:%n" +
                             "\tclass_name: one of %s%n" +
-                            "\tpath: path to text file%n%n",
+                            "\tpath: path to text file%n" +
+                    "Optional parameter:%n" +
+                            "\tquiet_mode: any text switches on the quiet mode%n%n",
                     implementations.keySet()
             );
             System.out.println(usage);
@@ -38,7 +40,7 @@ public class App {
         StopWatch totalStopWatch = new StopWatch();
 
         StopWatch extractWordsStopWatch = new StopWatch();
-        List<String> words = counter.extractWords( path );
+        Collection<String> words = counter.extractWords( path );
         int totalWordCount = words.size();
         extractWordsStopWatch.stop();
 
@@ -48,7 +50,7 @@ public class App {
         countWordsStopWatch.stop();
 
         StopWatch wordFrequenciesStopWatch = new StopWatch();
-        List<WordFrequency> wordFrequencies = counter.mostFrequentWords( countWords, totalWordCount, 15 );
+        Collection<WordFrequency> wordFrequencies = counter.mostFrequentWords( countWords, totalWordCount, 15 );
         wordFrequenciesStopWatch.stop();
 
         totalStopWatch.stop();
