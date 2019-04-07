@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Implementation using Java standard library 1.8 - parallel variant.
+ */
 public final class CounterJ8Prl implements Counter {
 
     @Override

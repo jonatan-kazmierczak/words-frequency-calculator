@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Implementation using Java standard library 1.7
+ */
 public final class CounterJ7 implements Counter {
 
     @Override

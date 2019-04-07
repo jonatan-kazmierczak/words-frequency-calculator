@@ -7,6 +7,9 @@ import java.io.UncheckedIOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Implementation using Java standard library 1.5
+ */
 public final class CounterJ5 implements Counter {
 
     @Override

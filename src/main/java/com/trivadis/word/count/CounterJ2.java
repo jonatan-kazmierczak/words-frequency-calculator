@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
 
+/**
+ * Implementation using Java standard library 1.2
+ */
 public final class CounterJ2 implements Counter {
 
     @Override
