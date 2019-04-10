@@ -14,7 +14,7 @@ public final class CounterJ7 implements Counter {
 
     @Override
     public Collection<String> extractWords(String path) {
-        ArrayList<String> words = new ArrayList<>( 0x2000 );
+        ArrayList<String> words = new ArrayList<>( 0x1000 );
         try ( Scanner sc = new Scanner( Files.newBufferedReader( Paths.get( path ) ) ) ) {
             while ( sc.hasNext() ) {
                 String word = sc.next();
