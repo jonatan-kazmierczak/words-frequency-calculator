@@ -1,4 +1,4 @@
-package com.trivadis.word.count;
+package com.trivadis.words.frequency;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Implementation using Java standard library 1.7
  */
-public final class CounterJ7 implements Counter {
+public final class CalculatorJ7 implements Calculator {
 
     @Override
     public Collection<String> extractWords(String path) {
@@ -43,7 +43,7 @@ public final class CounterJ7 implements Counter {
     }
 
     @Override
-    public Collection<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
         Collections.sort(
                 wordCountsList,

@@ -1,4 +1,4 @@
-package com.trivadis.word.count;
+package com.trivadis.words.frequency;
 
 public final class StopWatch {
     private final long startTime = System.currentTimeMillis();

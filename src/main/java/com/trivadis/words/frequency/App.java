@@ -1,4 +1,4 @@
-package com.trivadis.word.count;
+package com.trivadis.words.frequency;
 
 import java.util.Collection;
 import java.util.Map;
@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 public class App {
     public static void main(String[] args) {
         // Explicit instantiation required by native-image compiler (from GraalVM)
-        Map<String, Counter> implementations = Stream.of(
-                new CounterJ2(),
-                new CounterJ5(),
-                new CounterJ7(),
-                new CounterJ8(),
-                new CounterJ8Prl()
+        Map<String, Calculator> implementations = Stream.of(
+                new CalculatorJ2(),
+                new CalculatorJ5(),
+                new CalculatorJ7(),
+                new CalculatorJ8(),
+                new CalculatorJ8Prl()
         ).collect( Collectors.toMap( c -> c.getClass().getSimpleName(), c -> c, (l, r) -> l, TreeMap::new ) );
 
         if ( args.length < 2 || !implementations.containsKey( args[0] ) ) {
@@ -30,27 +30,27 @@ public class App {
             throw new AssertionError( "Missing class_name and/or path" );
         }
 
-        Counter counter = implementations.get( args[0] );
+        Calculator calculator = implementations.get( args[0] );
         String path = args[1];
         boolean beQuiet = args.length > 2;
-        run( counter, path, beQuiet );
+        run( calculator, path, beQuiet );
     }
 
-    private static void run(Counter counter, String path, boolean beQuiet) {
+    private static void run(Calculator calculator, String path, boolean beQuiet) {
         StopWatch totalStopWatch = new StopWatch();
 
         StopWatch extractWordsStopWatch = new StopWatch();
-        Collection<String> words = counter.extractWords( path );
+        Collection<String> words = calculator.extractWords( path );
         int totalWordCount = words.size();
         extractWordsStopWatch.stop();
 
         StopWatch countWordsStopWatch = new StopWatch();
-        Map<String, ? extends Number> countWords = counter.countWords( words );
+        Map<String, ? extends Number> countWords = calculator.countWords( words );
         int uniqueWordCount = countWords.size();
         countWordsStopWatch.stop();
 
         StopWatch wordFrequenciesStopWatch = new StopWatch();
-        Collection<WordFrequency> wordFrequencies = counter.mostFrequentWords( countWords, totalWordCount, 15 );
+        Collection<WordFrequency> wordFrequencies = calculator.getMostFrequentWords( countWords, totalWordCount, 15 );
         wordFrequenciesStopWatch.stop();
 
         totalStopWatch.stop();
@@ -62,14 +62,14 @@ public class App {
                 System.out.println( wordFrequency );
             }
 
-            System.out.println( "\n# Implementation,Total_Processing_Time,extractWords_Time,countWords_Time,mostFrequentWords_Time" );
+            System.out.println( "\n# Implementation,Total_Processing_Time,extractWords_Time,countWords_Time,getMostFrequentWords_Time" );
         }
 
         // Print statistics
-        // # extractWords,countWords,mostFrequentWords,total
+        // # extractWords,countWords,getMostFrequentWords,total
         System.out.printf(
                 "%s,%.3f,%.3f,%.3f,%.3f%n",
-                counter.getClass().getSimpleName(),
+                calculator.getClass().getSimpleName(),
                 totalStopWatch.getElapsedTimeSeconds(),
                 extractWordsStopWatch.getElapsedTimeSeconds(),
                 countWordsStopWatch.getElapsedTimeSeconds(),

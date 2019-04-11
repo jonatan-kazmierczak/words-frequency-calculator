@@ -1,30 +1,28 @@
-package com.trivadis.word.count;
+package com.trivadis.words.frequency;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Implementation using Java standard library 1.2
+ * Implementation using Java standard library 1.5
  */
-public final class CounterJ2 implements Counter {
+public final class CalculatorJ5 implements Calculator {
 
     @Override
     public Collection<String> extractWords(String path) {
         ArrayList<String> words = new ArrayList<>( 0x1000 );
-        try ( BufferedReader reader = new BufferedReader( new FileReader( path ) ) ) {
-            for ( String line = reader.readLine(); line != null; line = reader.readLine() ) {
-                StringTokenizer tokenizer = new StringTokenizer( line );
-                while ( tokenizer.hasMoreElements() ) {
-                    String word = tokenizer.nextToken();
-                    if ( word.length() > WORD_LENGTH_THRESHOLD ) {
-                        words.add( word.toLowerCase() );
-                    }
+        try ( Scanner sc = new Scanner( new BufferedReader( new FileReader( path ) ) ) ) {
+            while ( sc.hasNext() ) {
+                String word = sc.next();
+                if ( word.length() > WORD_LENGTH_THRESHOLD ) {
+                    words.add( word.toLowerCase() );
                 }
             }
-        } catch ( IOException e ) {
+        } catch ( FileNotFoundException e ) {
             throw new UncheckedIOException( e );
         }
         return words;
@@ -32,17 +30,20 @@ public final class CounterJ2 implements Counter {
 
     @Override
     public Map<String, ? extends Number> countWords(Collection<String> words) {
-        HashMap<String, Integer> wordCounters = new HashMap<>( words.size() >> 2 );
+        HashMap<String, AtomicInteger> wordCounters = new HashMap<>( words.size() >> 2 );
         for ( String word : words ) {
-            Integer counter = wordCounters.get( word );
-            counter = (counter == null) ? 1 : counter + 1;
-            wordCounters.put( word, counter );
+            AtomicInteger counter = wordCounters.get( word );
+            if ( counter == null ) {
+                counter = new AtomicInteger();
+                wordCounters.put( word, counter );
+            }
+            counter.getAndIncrement();
         }
         return wordCounters;
     }
 
     @Override
-    public Collection<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
         Collections.sort(
                 wordCountsList,

@@ -1,4 +1,4 @@
-package com.trivadis.word.count;
+package com.trivadis.words.frequency;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Implementation using Java standard library 1.8
+ * Implementation using Java standard library 1.8 - parallel variant.
  */
-public final class CounterJ8 implements Counter {
+public final class CalculatorJ8Prl implements Calculator {
 
     @Override
     public Collection<String> extractWords(String path) {
         try ( Stream<String> fileLines = Files.lines( Paths.get( path ) ) ) {
-            return fileLines
+            return fileLines.parallel().unordered()
                     .map( line -> line.split( "\\p{javaWhitespace}+" ) )
-                    .flatMap( Stream::of )
+                    .flatMap( wordArr -> Stream.of( wordArr ).parallel().unordered() )
                     .filter( word -> word.length() > WORD_LENGTH_THRESHOLD )
                     .map( String::toLowerCase )
                     .collect( Collectors.toList() );
@@ -31,13 +31,13 @@ public final class CounterJ8 implements Counter {
 
     @Override
     public Map<String, ? extends Number> countWords(Collection<String> words) {
-        return words.stream()
-                .collect( Collectors.groupingBy( word -> word, Collectors.summingInt( word -> 1 ) ) );
+        return words.parallelStream().unordered()
+                .collect( Collectors.groupingByConcurrent( word -> word, Collectors.summingInt( word -> 1 ) ) );
     }
 
     @Override
-    public Collection<WordFrequency> mostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
-        return wordCounts.entrySet().stream()
+    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+        return wordCounts.entrySet().parallelStream().unordered()
                 .sorted( Map.Entry.comparingByValue( Collections.reverseOrder() ) )
                 .limit( limit )
                 .map( e -> new WordFrequency( e.getKey(), e.getValue().intValue(), totalWordCount ) )

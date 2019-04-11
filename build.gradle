@@ -6,8 +6,10 @@ plugins {
     id 'application'
 }
 
+sourceCompatibility = '1.8'
+
 // Define the main class for the application
-mainClassName = 'com.trivadis.word.count.App'
+mainClassName = 'com.trivadis.words.frequency.App'
 
 jar {
     manifest {
