@@ -39,6 +39,8 @@ struct WordFrequency {
 };
 
 
+const int WORD_LENGTH_THRESHOLD = 0;
+
 inline vector<string> extractWords(string path) {
     vector<string> words;
     words.reserve( 0x1000 );
@@ -47,7 +49,7 @@ inline vector<string> extractWords(string path) {
     while ( !fin.eof() ) {
         string word;
         fin >> word;
-        if ( word.length() > 4 ) {
+        if ( word.length() > WORD_LENGTH_THRESHOLD ) {
             boost::to_lower( word );
             words.push_back( word );
         }

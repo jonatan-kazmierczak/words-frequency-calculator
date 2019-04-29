@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public interface Calculator {
-    int WORD_LENGTH_THRESHOLD = 4;
+    int WORD_LENGTH_THRESHOLD = 0;
 
     Collection<String> extractWords(String path);
     Map<String, ? extends Number> countWords(Collection<String> words);
