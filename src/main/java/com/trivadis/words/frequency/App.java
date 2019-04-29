@@ -23,7 +23,7 @@ public class App {
                             "\tclass_name: one of %s%n" +
                             "\tpath: path to text file%n" +
                     "Optional parameter:%n" +
-                            "\tquiet_mode: any text switches on the quiet mode%n%n",
+                            "\trepeat_count: number of repeatations (default: 1), turns on quiet mode when provided%n%n",
                     implementations.keySet()
             );
             System.out.println(usage);
@@ -33,7 +33,17 @@ public class App {
         Calculator calculator = implementations.get( args[0] );
         String path = args[1];
         boolean beQuiet = args.length > 2;
-        run( calculator, path, beQuiet );
+        
+        int repeatCount = 1;
+        try {
+            repeatCount = Integer.parseInt( args[2] );
+        } catch (RuntimeException e) {
+            // Ignore
+        }
+        
+        for (int i = 0; i < repeatCount; ++i) {
+            run( calculator, path, beQuiet );
+        }
     }
 
     private static void run(Calculator calculator, String path, boolean beQuiet) {
