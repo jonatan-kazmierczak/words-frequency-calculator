@@ -72,18 +72,18 @@ public class App {
                 System.out.println( wordFrequency );
             }
 
-            System.out.println( "\n# Implementation,Total_Processing_Time,extractWords_Time,countWords_Time,getMostFrequentWords_Time" );
+            System.out.println( "\n# Implementation,Total_Processing_Time_ms,extractWords_Time_ms,countWords_Time_ms,getMostFrequentWords_Time_ms" );
         }
 
         // Print statistics
         // # extractWords,countWords,getMostFrequentWords,total
         System.out.printf(
-                "%s,%.3f,%.3f,%.3f,%.3f%n",
+                "%s,%d,%d,%d,%d%n",
                 calculator.getClass().getSimpleName(),
-                totalStopWatch.getElapsedTimeSeconds(),
-                extractWordsStopWatch.getElapsedTimeSeconds(),
-                countWordsStopWatch.getElapsedTimeSeconds(),
-                wordFrequenciesStopWatch.getElapsedTimeSeconds()
+                totalStopWatch.getElapsedTimeMs(),
+                extractWordsStopWatch.getElapsedTimeMs(),
+                countWordsStopWatch.getElapsedTimeMs(),
+                wordFrequenciesStopWatch.getElapsedTimeMs()
         );
 
         // Perform cleanup

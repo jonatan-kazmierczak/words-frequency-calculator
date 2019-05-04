@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <cmath>
 #include <boost/algorithm/string.hpp>
 
 using namespace std;
@@ -19,6 +20,10 @@ public:
     
     void stop() {
         end = chrono::steady_clock::now();
+    }
+    
+    int getElapsedTimeMs() {
+        return round( getElapsedTimeSeconds() * 1000 );
     }
     
     double getElapsedTimeSeconds() {
@@ -106,11 +111,11 @@ inline void run(string& path) {
 
     // Print statistics
     printf(
-            "CPP,%.3f,%.3f,%.3f,%.3f\n",
-            totalStopWatch.getElapsedTimeSeconds(),
-            extractWordsStopWatch.getElapsedTimeSeconds(),
-            countWordsStopWatch.getElapsedTimeSeconds(),
-            wordFrequenciesStopWatch.getElapsedTimeSeconds()
+            "CPP,%d,%d,%d,%d\n",
+            totalStopWatch.getElapsedTimeMs(),
+            extractWordsStopWatch.getElapsedTimeMs(),
+            countWordsStopWatch.getElapsedTimeMs(),
+            wordFrequenciesStopWatch.getElapsedTimeMs()
     );
 }
 
