@@ -28,15 +28,8 @@ calculating word frequencies in a given file
 java -jar build/libs/words-freq-calc.jar CalculatorJ8 big_example-4_gospels.txt
 ```
 
-#### Run multiple times
-to collect performance statistics
-```bash
-./run_x_times.sh 11 java -jar build/libs/words-freq-calc.jar CalculatorJ8 big_example-4_gospels.txt q
-```
-
 ### Build an executable
-on OSX or Linux.  
-You will need a [GraalVM](https://graalvm.org) package.
+using [GraalVM](https://graalvm.org) (on Linux and OSX).
 
 Once GraalVM is installed:
 ```bash
@@ -79,8 +72,24 @@ g++ -std=c++14 -O2 -o wfc src/main/cpp/words-freq-calc.cpp
 ./wfc
 ```
 
-#### Run implementation
+#### Run the implementation
 calculating word frequencies in a given file
 ```bash
 ./wfc big_example-4_gospels.txt
+```
+
+## Collect extensive performance statistics
+in CSV files in `stats` directory
+```bash
+./collect_statistics.sh
+```
+
+Please take a look at the script to see, what statistics are collected and how.  
+Feel free to adapt the script to your needs.
+
+## Analyze collected performance statistics
+in text format, as well as on charts - using R scripts in `stats` directory
+```bash
+Rscript show_stats.R
+Rscript show_stats_charts.R
 ```
