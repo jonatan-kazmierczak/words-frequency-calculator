@@ -17,7 +17,14 @@ import_csv <- function(path) {
 }
 
 
-cat("\nexecution of Java bytecode with JIT−compiled code (Tier 3 / C1)")
+title = "execution of Java bytecode with JIT-compiled code (Tier 3 / C1)"
+title_jit = "execution of JIT-compiled code (Tier 4 / C2)"
+title_graal = "execution of JIT-compiled code (Tier 4 / Graal)"
+title_aot = "execution of AOT-compiled code (SVM)"
+title_comp = "execution of CalculatorJ8"
+
+
+cat("\n", title, "\n")
 df_c1 <- rbind(
   import_csv("j2.csv"),
   #import_csv("j5.csv"),
@@ -28,7 +35,7 @@ df_c1 <- rbind(
 )
 df_c1
 
-cat("\nexecution of JIT−compiled code (Tier 3+4 / C1+C2)")
+cat("\n", title_jit, "\n")
 df_c2 <- rbind(
   import_csv("j2jit.csv"),
   #import_csv("j5jit.csv"),
@@ -39,7 +46,7 @@ df_c2 <- rbind(
 )
 df_c2
 
-cat("\nexecution of JIT−compiled code (Tier 3+4 / C1+Graal)")
+cat("\n", title_graal, "\n")
 df_graal <- rbind(
   import_csv("j2graal.csv"),
   #import_csv("j5graal.csv"),
@@ -50,7 +57,7 @@ df_graal <- rbind(
 )
 df_graal
 
-cat("\nexecution of AOT−compiled code (GraalVM)")
+cat("\n", title_aot, "\n")
 df_aot <- rbind(
   import_csv("j2aot.csv"),
   #import_csv("j5aot.csv"),
