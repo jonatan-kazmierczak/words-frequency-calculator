@@ -3,6 +3,12 @@ Simple application calculating most frequent words in a given text file,
 demonstrating features of Java and C++
 
 ## Java application
+It contains implementations using the following versions of the Java standard library:
+- CalculatorJ2 - v1.2
+- CalculatorJ5 - v1.5
+- CalculatorJ7 - v1.7
+- CalculatorJ8 - v1.8
+- CalculatorJ8Prl - v1.8, parallel variant
 
 ### Build a JAR file
 If you have Gradle installed, then
