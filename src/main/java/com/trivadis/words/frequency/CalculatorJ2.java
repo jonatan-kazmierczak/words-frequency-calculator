@@ -25,7 +25,7 @@ public final class CalculatorJ2 implements Calculator {
                 }
             }
         } catch ( IOException e ) {
-            throw new UncheckedIOException( e );
+            throw new RuntimeException( e );
         }
         return words;
     }
@@ -42,8 +42,10 @@ public final class CalculatorJ2 implements Calculator {
     }
 
     @Override
-    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
-        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
+    public Collection<WordFrequency> getMostFrequentWords(
+            Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList
+                = new ArrayList<>( wordCounts.entrySet() );
         Collections.sort(
                 wordCountsList,
                 new Comparator<Map.Entry<String, ? extends Number>>() {

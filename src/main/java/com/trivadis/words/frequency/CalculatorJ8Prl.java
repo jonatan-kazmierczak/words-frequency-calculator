@@ -31,12 +31,14 @@ public final class CalculatorJ8Prl implements Calculator {
 
     @Override
     public Map<String, ? extends Number> countWords(Collection<String> words) {
-        return words.parallelStream().unordered()
-                .collect( Collectors.groupingByConcurrent( word -> word, Collectors.summingInt( word -> 1 ) ) );
+        return words.parallelStream().unordered().collect(
+                Collectors.groupingByConcurrent( word -> word, Collectors.summingInt( word -> 1 ) )
+        );
     }
 
     @Override
-    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+    public Collection<WordFrequency> getMostFrequentWords(
+            Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
         return wordCounts.entrySet().parallelStream().unordered()
                 .sorted( Map.Entry.comparingByValue( Collections.reverseOrder() ) )
                 .limit( limit )

@@ -15,15 +15,15 @@ public final class CalculatorJ7 implements Calculator {
     @Override
     public Collection<String> extractWords(String path) {
         ArrayList<String> words = new ArrayList<>( 0x1000 );
-        try ( Scanner sc = new Scanner( Files.newBufferedReader( Paths.get( path ) ) ) ) {
-            while ( sc.hasNext() ) {
-                String word = sc.next();
+        try ( Scanner scanner = new Scanner( Files.newBufferedReader( Paths.get( path ) ) ) ) {
+            while ( scanner.hasNext() ) {
+                String word = scanner.next();
                 if ( word.length() > WORD_LENGTH_THRESHOLD ) {
                     words.add( word.toLowerCase() );
                 }
             }
-        } catch (IOException e ) {
-            throw new UncheckedIOException( e );
+        } catch ( IOException e ) {
+            throw new RuntimeException( e );
         }
         return words;
     }
@@ -43,8 +43,10 @@ public final class CalculatorJ7 implements Calculator {
     }
 
     @Override
-    public Collection<WordFrequency> getMostFrequentWords(Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
-        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList = new ArrayList<>( wordCounts.entrySet() );
+    public Collection<WordFrequency> getMostFrequentWords(
+            Map<String, ? extends Number> wordCounts, int totalWordCount, int limit) {
+        ArrayList<? extends Map.Entry<String, ? extends Number>> wordCountsList
+                = new ArrayList<>( wordCounts.entrySet() );
         Collections.sort(
                 wordCountsList,
                 new Comparator<Map.Entry<String, ? extends Number>>() {
