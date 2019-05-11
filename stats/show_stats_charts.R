@@ -112,12 +112,12 @@ df_j8 <- rbind(
   import_csv("cpp.csv")
 )
 df_j8$Implementation <- c("CalculatorJ8 (bytecode+C1)", "CalculatorJ8 (AOT)", "CalculatorJ8 (C2)", "CalculatorJ8 (Graal)", "CPP")
-df_j8
+#df_j8
 
 
 bar_chart(df_c1, title, colors)
-bar_chart(df_aot, title_aot, colors_aot)
 bar_chart(df_c2, title_jit, colors_jit)
 bar_chart(df_graal, title_graal, colors_jit)
+bar_chart(df_aot, title_aot, colors_aot)
 
-bar_chart(df_j8, title_comp, colors)
+#bar_chart(df_j8, title_comp, colors)
