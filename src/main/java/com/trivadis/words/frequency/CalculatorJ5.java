@@ -3,7 +3,6 @@ package com.trivadis.words.frequency;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.UncheckedIOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -23,7 +22,7 @@ public final class CalculatorJ5 implements Calculator {
                 }
             }
         } catch ( FileNotFoundException e ) {
-            throw new UncheckedIOException( e );
+            throw new RuntimeException( e );
         }
         return words;
     }

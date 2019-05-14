@@ -3,7 +3,6 @@ package com.trivadis.words.frequency;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.*;
 
 /**
