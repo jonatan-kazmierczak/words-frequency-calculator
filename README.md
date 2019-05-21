@@ -31,7 +31,7 @@ java -jar build/libs/words-freq-calc.jar
 #### Run one implementation
 calculating word frequencies in a given file
 ```bash
-java -jar build/libs/words-freq-calc.jar CalculatorJ8 big_example-4_gospels.txt
+java -jar build/libs/words-freq-calc.jar CalculatorJ8 texts/bible_ylt.txt
 ```
 
 ### Build an executable
@@ -52,7 +52,7 @@ $GRAALVM_HOME/bin/native-image -jar build/libs/words-freq-calc.jar
 #### Run one implementation
 calculating word frequencies in a given file
 ```bash
-./words-freq-calc CalculatorJ8 big_example-4_gospels.txt
+./words-freq-calc CalculatorJ8 texts/bible_ylt.txt
 ```
 
 ## C++ implementation
@@ -81,7 +81,7 @@ g++ -std=c++14 -O2 -o wfc src/main/cpp/words-freq-calc.cpp
 #### Run the implementation
 calculating word frequencies in a given file
 ```bash
-./wfc big_example-4_gospels.txt
+./wfc texts/bible_ylt.txt
 ```
 
 ## Collect extensive performance statistics
