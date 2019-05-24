@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,7 +33,7 @@ public final class CalculatorJ8 implements Calculator {
     @Override
     public Map<String, ? extends Number> countWords(Collection<String> words) {
         return words.stream().collect(
-                Collectors.groupingBy( word -> word, Collectors.summingInt( word -> 1 ) )
+                Collectors.groupingBy( Function.identity(), Collectors.counting() )
         );
     }
 
