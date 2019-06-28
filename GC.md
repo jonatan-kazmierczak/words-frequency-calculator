@@ -4,7 +4,8 @@
 https://docs.oracle.com/en/java/javase/12/gctuning/
 
 #### G1
-* default GC since Java 9
+* default GC since Java 9:  
+  [Getting Started with the G1 Garbage Collector](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html)
 * features added in Java 12:
   * [Promptly Return Unused Committed Memory from G1](http://openjdk.java.net/jeps/346)  
   * [Abortable Mixed Collections for G1](http://openjdk.java.net/jeps/344)  
