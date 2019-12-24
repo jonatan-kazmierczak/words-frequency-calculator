@@ -6,7 +6,7 @@ plugins {
     id 'application'
 }
 
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 // Define the main class for the application
 mainClassName = 'com.trivadis.words.frequency.App'
